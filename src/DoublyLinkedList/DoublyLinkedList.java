@@ -1,5 +1,6 @@
 package DoublyLinkedList;
 
+
 public class DoublyLinkedList {
 
     private Node head;
@@ -119,6 +120,96 @@ public class DoublyLinkedList {
         newHead.prev = null;
         Node temp = head;
         head = newHead;
+        temp.next = null;
+        length --;
+        return temp;
+    }
+
+    public Node get(int index) {
+        if (index < 0 || index >= length) {
+            return null;
+        }
+
+        Node temp = head;
+        for (int i = 0; i < index; i ++) {
+            temp = temp.next;
+        }
+        // if the index is in the first half of the list
+//        if (index < length/2) {
+//            // iterate through the list from the head to the index
+//            for (int i = 0; i < index; i++) {
+//                temp = temp.next;
+//            }
+//        } else {
+//            // if the index is in the second half of the list
+//            // initialize the temporary node with the value of the tail
+//            temp = tail;
+//            // iterate through the list from the tail to the index
+//            for (int i = length - 1; i > index; i--) {
+//                temp = temp.prev;
+//            }
+//        }
+        // return the node at the given index
+        return temp;
+    }
+
+    public boolean set(int index, int value) {
+        Node temp = get(index);
+        if (temp == null) {
+            return false;
+        }
+        temp.value = value;
+        return true;
+    }
+
+    public boolean insert(int index, int value) {
+        if (index < 0 || index > length) {
+            return false;
+        }
+
+        if (index == 0) {
+            prepend(value);
+            return true;
+        }
+
+        if (index == length) {
+            append(value);
+            return true;
+        }
+
+        Node newNode = new Node(value);
+        Node prev = get(index - 1);
+        newNode.next = prev.next;
+        prev.next.prev = newNode;
+        prev.next = newNode;
+
+        newNode.prev = prev;
+
+        length ++;
+        return true;
+    }
+
+    public Node remove(int index) {
+
+        if (index < 0 || index >= length) {
+            return null;
+        }
+
+        if (index == 0) {
+            return removeFirst();
+        }
+
+        if (index == length - 1 ) {
+            return removeLast();
+        }
+
+        Node temp = get(index);
+        Node prev = temp.prev;
+        Node next = temp.next;
+        prev.next = next;
+        next.prev = prev;
+        temp.prev = null;
+        temp.next = null;
         length --;
         return temp;
     }
