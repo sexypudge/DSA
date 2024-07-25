@@ -224,5 +224,6 @@ public class DoublyLinkedList {
 
         System.out.println("\nDoubly Linked List:");
         myDLL.printList();
+
     }
 }

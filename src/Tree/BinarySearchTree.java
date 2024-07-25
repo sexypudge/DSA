@@ -265,6 +265,43 @@ public class BinarySearchTree {
 //        }
 //    }
 
+    public List<Integer> DFSPostOrder() {
+        List<Integer> results = new ArrayList<>();
+        class Traverse {
+            Traverse(Node currentNode) {
+                if (currentNode.left != null) {
+                    new Traverse(currentNode.left);
+                }
+
+                if (currentNode.right != null) {
+                    new Traverse(currentNode.right);
+                }
+                results.add(currentNode.value);
+            }
+        }
+        new Traverse(root);
+        return results;
+    }
+
+    public List<Integer> DFSInOrder() {
+        List<Integer> results = new ArrayList<>();
+        class Traverse {
+            Traverse(Node currentNode) {
+                if (currentNode.left != null) {
+                    new Traverse(currentNode.left);
+                }
+
+                results.add(currentNode.value);
+
+                if (currentNode.right != null) {
+                    new Traverse(currentNode.right);
+                }
+            }
+        }
+        new Traverse(root);
+        return results;
+    }
+
     public static void main(String[] args) {
 
         BinarySearchTree myBST = new BinarySearchTree();
