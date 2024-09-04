@@ -2,6 +2,7 @@ package HashTable;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class HashTable {
@@ -56,20 +57,20 @@ public class HashTable {
         }
 
         Node temp = dataMap[hashIndex];
-        while (temp != null) {
-            if (temp.next == null) {
-                temp.next = new Node(key, value);
-                return;
-            }
+//        while (temp != null) {
+//            if (temp.next == null) {
+//                temp.next = new Node(key, value);
+//                return;
+//            }
+//
+//            temp = temp.next;
+//        }
 
+        while (temp.next != null) {
             temp = temp.next;
         }
 
-//        while (temp.next != null) {
-//            temp = temp.next;
-//        }
-//
-//        temp.next = new Node(key, value);
+        temp.next = new Node(key, value);
     }
 
     public int get(String key) {

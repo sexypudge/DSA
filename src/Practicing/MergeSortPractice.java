@@ -1,4 +1,4 @@
-package MergeSort;
+package Practicing;
 
 public class MergeSortPractice {
 }

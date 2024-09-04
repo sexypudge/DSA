@@ -302,13 +302,41 @@ public class BinarySearchTree {
         return results;
     }
 
+    public boolean bInsert(int value) {
+        Node newNode = new Node(value);
+        if (root == null) {
+            root = newNode;
+            return true;
+        }
+        Node temp = root;
+        while (true) {
+            if (newNode.value == temp.value) return false;
+            if (newNode.value < temp.value) {
+                if (temp.left == null) {
+                    temp.left = newNode;
+                    return true;
+                }
+                temp = temp.left;
+            } else {
+                if (temp.right == null) {
+                    temp.right = newNode;
+                    return true;
+                }
+                temp = temp.right;
+            }
+        }
+    }
+
     public static void main(String[] args) {
 
         BinarySearchTree myBST = new BinarySearchTree();
-        myBST.rInsert(48);
         myBST.rInsert(21);
-        myBST.rInsert(18);
+        myBST.rInsert(47);
         myBST.rInsert(27);
+        myBST.rInsert(82);
+        myBST.rInsert(52);
+        myBST.rInsert(76);
+        myBST.rInsert(18);
 //        myBST.insert(2);
 //        myBST.insert(1);
 //        myBST.insert(3);

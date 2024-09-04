@@ -13,6 +13,7 @@ public class Heap {
     public List<Integer> getHeap() {
         return new ArrayList<>(heap);
     }
+
     private int leftChild(int index) {
         return 2* index + 1;
     }
@@ -35,17 +36,17 @@ public class Heap {
         heap.add(value);
 
         int current = heap.size() - 1;
-        int parent = parent(current);
+//        int parent = parent(current);
 
-        while (heap.get(current) > heap.get(parent)) {
-            swap(current, parent);
-            current = parent;
-            parent = parent(current);
-        }
-//        while (current > 0 && heap.get(current) > heap.get(parent(current))) {
-//            swap(current, parent(current));
-//            current = parent(current);
+//        while (current > 0 && heap.get(current) > heap.get(parent)) {
+//            swap(current, parent);
+//            current = parent;
+//            parent = parent(current);
 //        }
+        while (current > 0 && heap.get(current) > heap.get(parent(current))) {
+            swap(current, parent(current));
+            current = parent(current);
+        }
     }
 
     private void sinkDown(int index) {
@@ -141,6 +142,6 @@ public class Heap {
 //        heap.insert(58);
 //        heap.insert(72);
 //        heap.insert(100);
-        System.out.println(heap.remove());
+//        System.out.println(heap.remove());
     }
 }

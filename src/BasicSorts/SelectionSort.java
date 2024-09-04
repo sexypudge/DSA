@@ -1,8 +1,14 @@
 package BasicSorts;
 
+import Helper.Helper;
+
 import java.util.Arrays;
 
 public class SelectionSort {
+    /**
+     *  Gen comment
+     * @param array
+     */
     public static void sort(int[] array) {
         for (int i = 0; i < array.length; i++) {
             int minIndex = i;
@@ -13,9 +19,7 @@ public class SelectionSort {
                 }
             }
 
-            int temp = array[i];
-            array[i] = array[minIndex];
-            array[minIndex] = temp;
+            Helper.swap(array, i, minIndex);
         }
     }
 

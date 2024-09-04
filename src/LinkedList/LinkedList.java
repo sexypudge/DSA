@@ -274,9 +274,11 @@ public class LinkedList {
         }
     }
 
+
     public static void main(String[] args) {
 
         LinkedList myLinkedList = new LinkedList(4);
+        myLinkedList.removeLast();
         myLinkedList.makeEmpty();
         myLinkedList.append(1);
         myLinkedList.append(2);
