@@ -14,6 +14,9 @@ public class MergeSort {
         return merge(left, right);
     }
 
+    /**
+     * #divideAndConquer
+     */
     private static int[] merge(int[] array1, int[] array2) {
         int size = array2.length + array1.length;
         int[] result = new int[size];

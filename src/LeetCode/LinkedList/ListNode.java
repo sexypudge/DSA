@@ -1,6 +1,4 @@
-package LeetCode;
-
-import LinkedList.LinkedList;
+package LeetCode.LinkedList;
 
 class ListNode {
     int val;

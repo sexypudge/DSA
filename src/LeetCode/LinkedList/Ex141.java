@@ -1,4 +1,4 @@
-package LeetCode;
+package LeetCode.LinkedList;
 
 public class Ex141 {
     public static boolean hasCycle(ListNode head) {

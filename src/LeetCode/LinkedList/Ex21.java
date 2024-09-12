@@ -1,4 +1,4 @@
-package LeetCode;
+package LeetCode.LinkedList;
 
 public class Ex21 {
 
