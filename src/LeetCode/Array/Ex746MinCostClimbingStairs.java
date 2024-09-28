@@ -10,8 +10,14 @@ public class Ex746MinCostClimbingStairs {
     }
 
     private static int minCost(int[] cost, int n) {
-        if (n < 0) return 0;
-        if (n == 0 || n == 1) return cost[n];
+        if (n < 0) {
+            return 0;
+        }
+
+        if (n == 0 || n == 1) {
+            return cost[n];
+        }
+
         return cost[n] + Math.min(minCost(cost, n - 1), minCost(cost, n - 2));
     }
 
@@ -78,10 +84,11 @@ public class Ex746MinCostClimbingStairs {
     public static void main(String[] args) {
         int[] arr = new int[]{10, 15, 20};
         int[] arr1 = new int[]{1, 100, 1, 1, 1};
+        int[] arr2 = new int[]{1, 100, 1, 1};
 
         System.out.println(minCostClimbingStairs(arr1));
         System.out.println(minCostClimbingStairsTopdownMemo(arr1));
-        System.out.println(minCostClimbingStairsBottomUpMemo(arr1));
+        System.out.println(minCostClimbingStairsBottomUpMemo(arr2));
         System.out.println(minCostClimbingStairsBottomUpFineTuning(arr1));
     }
 }

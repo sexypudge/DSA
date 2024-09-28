@@ -37,7 +37,7 @@ public class Ex70ClimbStair {
      * #DynamicProgramming #topDown with #Memo
      */
     public static int climbStairsTopDown(int n) {
-        memo = new Integer[n + 1];
+        memo = new Integer[n + 1]; // n + 1 because from index 0 to index n needs n+1 length
         return climbTopDown(n);
     }
 

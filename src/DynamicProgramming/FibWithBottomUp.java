@@ -19,9 +19,26 @@ public class FibWithBottomUp {
         return fibList[n];
     }
 
+    public static int fibWithoutList(int n) {
+        counter++;
+
+        int first = 0;
+        int second = 1;
+
+        // n is index,
+        for (int i = 2; i <= n; i++) { // we are finding value of index n so we use <=
+            second = second + first;
+            first = second - first;
+        }
+
+        return second;
+    }
+
     public static void main(String[] args) {
         int n = 7;
-        System.out.println(fib(n));
+//        System.out.println(fib(n));
+        System.out.println(fibWithoutList(n));
         System.out.println(counter);
+//        System.out.println(counter);
     }
 }

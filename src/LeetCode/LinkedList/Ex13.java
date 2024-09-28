@@ -15,7 +15,6 @@ public class Ex13 {
         map.put('C', 100);
         map.put('D', 500);
         map.put('M', 1000);
-
         int ans = 0;
 
         for (int i = 0; i < s.length(); i++) {
