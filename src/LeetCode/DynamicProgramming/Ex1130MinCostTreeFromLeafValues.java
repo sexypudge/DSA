@@ -1,4 +1,4 @@
-package LeetCode.Array;
+package LeetCode.DynamicProgramming;
 
 public class Ex1130MinCostTreeFromLeafValues {
 
