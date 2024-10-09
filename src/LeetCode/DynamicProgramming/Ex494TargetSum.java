@@ -63,6 +63,7 @@ public class Ex494TargetSum {
     }
 
     public static int findTargetSumWays2DArray(int[] nums, int target) {
+
         int sum = Arrays.stream(nums).sum();
 
         // If the absolute value of target is greater than the sum of the numbers, it's not possible
