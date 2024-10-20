@@ -1,4 +1,4 @@
-package LeetCode.DynamicProgramming;
+package LeetCode.DynamicProgramming.LinearDPDecisionMaking;
 
 public class Ex746MinCostClimbingStairs {
     /**

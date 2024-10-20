@@ -1,4 +1,4 @@
-package LeetCode.Array;
+package LeetCode.DynamicProgramming.Palindromes;
 
 public class Ex647PalindromicSubstrings {
 

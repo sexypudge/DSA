@@ -1,4 +1,4 @@
-package LeetCode.DynamicProgramming;
+package LeetCode.DynamicProgramming.IntervalDP;
 
 public class Ex1130MinCostTreeFromLeafValues {
 

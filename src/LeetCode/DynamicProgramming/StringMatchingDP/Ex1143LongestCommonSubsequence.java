@@ -1,4 +1,4 @@
-package LeetCode.DynamicProgramming;
+package LeetCode.DynamicProgramming.StringMatchingDP;
 
 public class Ex1143LongestCommonSubsequence {
     static int[] memo;

@@ -1,6 +1,6 @@
-package LeetCode.Array;
+package LeetCode.DynamicProgramming.LinearDPDecisionMaking;
 
-public class MaxProfit {
+public class Ex121BestTimeToBuyAndSellStock {
 
     public static int maxProfit(int[] prices) {
 		int maxProfit = 0;
@@ -36,6 +36,7 @@ public class MaxProfit {
     public static void main(String[] args) {
 
         int[] prices1 = {7, 1, 5, 3, 6, 4};
+
         int profit1 = maxProfit(prices1);
         System.out.println("Test case 1: Maximum profit: " + profit1); // prints "Maximum profit: 5"
 

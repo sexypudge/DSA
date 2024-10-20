@@ -1,4 +1,4 @@
-package LeetCode.DynamicProgramming;
+package LeetCode.DynamicProgramming.FibonacciNumber;
 
 public class Ex70ClimbStair {
 
