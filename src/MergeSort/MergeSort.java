@@ -51,7 +51,8 @@ public class MergeSort {
     }
 
     public static void main(String[] args) {
-        int[] array = {5, 4, 6, 2, 1, 3, 7, 8, 9};
+//        int[] array = {5, 4, 6, 2, 1, 3, 7, 8, 9};
+        int[] array = {5, 3, 2, 1, 4 };
         int[] array1 = {1, 3, 7, 8};
         int[] array2 = {2, 4, 5, 6};
 

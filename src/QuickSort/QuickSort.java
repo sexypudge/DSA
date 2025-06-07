@@ -22,7 +22,7 @@ public class QuickSort {
     public static void sort(int[] array, int left, int right) {
         if (left < right) {
             int pivotIndex = pivot(array, left, right);
-            sort(array, left, pivotIndex - 1);
+            sort(array, left, pivotIndex - 1); // pivot - 1 để chia thành 2 array, 1 array trước pivot và 1 array sau pivot
             sort(array, pivotIndex + 1, right);
         }
     }
@@ -35,7 +35,8 @@ public class QuickSort {
 
     public static void main(String[] args) {
         int[] array = {4, 6, 1, 8, 3, 2, 5, 7};
-        int[] array2 = {3, 4, 6, 7, 5};
+//        int[] array2 = {3, 4, 6, 7, 5, 1};
+        int[] array2 = {1, 3, 5, 2, 4};
 //        System.out.println(pivot(array, 0, 6));
 //        System.out.println(pivot(array, 1, 5));
 //        System.out.println(Arrays.toString(quickSort(array)));

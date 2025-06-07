@@ -81,7 +81,7 @@ public class Heap {
         }
 
         if (heap.size() == 1) {
-            return heap.remove(0);
+            return heap.removeFirst();
         }
 
 //        int maxValue = heap.get(0);
