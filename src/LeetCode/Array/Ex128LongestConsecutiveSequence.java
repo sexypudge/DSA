@@ -24,9 +24,7 @@ public class Ex128LongestConsecutiveSequence {
                 count = 1;
             }
 
-            if (longest < count) {
-                longest = count;
-            }
+            longest = Math.max(count, longest);
         }
 
         return longest;
@@ -43,14 +41,14 @@ public class Ex128LongestConsecutiveSequence {
         }
 
         int longest = 0;
-        int count = 0;
         for (int num : nums) {
+            int count = 1;
             if (!hash.contains(num - 1)) {
                 int currentNum = num; // start to check from num
 
                 while (hash.contains(currentNum + 1)) {
-                    currentNum ++; // increase to check consecutive sequence, started from num
-                    count ++;
+                    currentNum++; // increase to check consecutive sequence, started from num
+                    count++;
                 }
 
                 longest = Math.max(count, longest);
@@ -61,7 +59,7 @@ public class Ex128LongestConsecutiveSequence {
     }
 
 
-    public static int longestConsecutivebyMe(int[] nums) {
+    public static int longestConsecutiveByMe(int[] nums) {
         if (nums.length == 0) {
             return 0;
         }
@@ -94,7 +92,30 @@ public class Ex128LongestConsecutiveSequence {
         return longestConsecutiveSequence;
     }
 
+    public static int longestConsecutiveTest(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            set.add(num);
+        }
+        int longest = 0;
+
+        for (int num : nums) {
+            if (!set.contains(num - 1)) {
+                int count = 1;
+                int currentNum = num;
+                while (set.contains(currentNum + 1)) {
+                    count++;
+                    currentNum++;
+                }
+
+                longest = Math.max(count, longest);
+            }
+        }
+
+        return longest;
+    }
+
     public static void main(String[] args) {
-        System.out.println(longestConsecutive(new int[]{100, 4, 200, 1, 3, 2})); // Output: 4
+        System.out.println(longestConsecutive2(new int[]{100, 4, 200, 1, 3, 2})); // Output: 4
     }
 }

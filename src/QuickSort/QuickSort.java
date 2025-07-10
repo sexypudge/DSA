@@ -1,12 +1,14 @@
 package QuickSort;
 
+import Helper.Helper;
+
 import java.util.Arrays;
 
 import static Helper.Helper.*;
 
 public class QuickSort {
     private static int pivot(int[] array, int pivotIndex, int endIndex) {
-        int swapIndex = pivotIndex;
+        int swapIndex = pivotIndex; // pivotIndex là chỉ số đang chọn làm pivot (ở đây là phần tử đầu tiên trong đoạn left → right)
 
         for (int i = pivotIndex + 1; i <= endIndex; i++) {
             if (array[i] < array[pivotIndex]) {
@@ -23,12 +25,12 @@ public class QuickSort {
         if (left < right) {
             int pivotIndex = pivot(array, left, right);
             sort(array, left, pivotIndex - 1); // pivot - 1 để chia thành 2 array, 1 array trước pivot và 1 array sau pivot
-            sort(array, pivotIndex + 1, right);
+            sort(array, pivotIndex + 1, right); // còn pivot bỏ qua vì trong tổng thế array gốc nó đã ở đúng vị trí rồi.
         }
     }
 
     public static int[] quickSort(int[] array) {
-        sort(array, 0, array.length - 1);
+        QuickSort.sort(array, 0, array.length - 1);
         return array;
     }
 

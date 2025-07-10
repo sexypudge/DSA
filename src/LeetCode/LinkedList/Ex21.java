@@ -33,6 +33,50 @@ public class Ex21 {
         return result.next;
     }
 
+    public static ListNode mergeTwoListsTest(ListNode list1, ListNode list2) {
+        ListNode dummy = new ListNode(-1); // node giả
+        ListNode head = dummy; // node giả
+
+        while (list1 != null && list2 != null) {
+
+            if (list1.val < list2.val) {
+                dummy.next = list1;
+                list1 = list1.next;
+            } else {
+                dummy.next = list2;
+                list2 = list2.next;
+            }
+            dummy = dummy.next;
+        }
+
+        // Chỉ cần nối phần còn lại (không cần dùng 2 while)
+        if (list1 != null) dummy.next = list1;
+        if (list2 != null) dummy.next = list2;
+
+        return head.next;
+    }
+
+    /**
+     * Input: list1 = [1,2,4], list2 = [1,3,4]
+     * Output: [1,1,2,3,4,4]
+     *   1(L2)-> 1(L1)> 2(L1)-> 3(L2) -> 4(L2) -> 4(L1)
+     * @param list1
+     * @param list2
+     * @return
+     */
+    public ListNode mergeTwoListsRecursive(ListNode list1, ListNode list2) {
+        if (list1 == null) return list2;
+        if (list2 == null) return list1;
+
+        if (list1.val < list2.val) {
+            list1.next = mergeTwoListsRecursive(list1.next, list2);
+            return list1;
+        } else {
+            list2.next = mergeTwoListsRecursive(list1, list2.next);
+            return list2;
+        }
+    }
+    
     public static void main(String[] args) {
 //        ListNode listA1 = new ListNode(1);
         ListNode listA12 = new ListNode(2);

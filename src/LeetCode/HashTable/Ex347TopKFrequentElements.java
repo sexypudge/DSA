@@ -22,9 +22,9 @@ public class Ex347TopKFrequentElements {
             if (heap.size() > k) heap.poll();
         }
 
-        for (int i = 0 ; i < k -1 ; i++) {
+        for (int i = 0; i < k - 1; i++) {
             if (!heap.isEmpty()) {
-                result[i] =  heap.poll();
+                result[i] = heap.poll();
             }
         }
 
@@ -62,42 +62,65 @@ public class Ex347TopKFrequentElements {
         return result.stream().mapToInt(i -> i).toArray();
     }
 
+
     public int[] topKFrequentBucketSortTest(int[] nums, int k) {
-        if (nums.length == k) {
-            return nums;
-        }
         int[] result = new int[k];
-
-        Map<Integer, Integer> freqMap = new HashMap<>();
-        for (Integer num : nums) {
-            freqMap.compute(num, (key, value) -> value == null ? 1 : value + 1);
+        Map<Integer, Integer> counterByNum = new HashMap<>();
+        for (int num : nums) {
+            counterByNum.compute(num, (key, value) -> value == null ? 1 : value + 1);
         }
 
-        List<Integer>[] bucket = new ArrayList[nums.length + 1];
+        List<List<Integer>> bucketSort = new ArrayList<>(counterByNum.size() + 1); // cover index 0
 
-        freqMap.forEach((key, value) -> {
-            if (bucket[value] == null) {
-                bucket[value] = new ArrayList<>();
-            }
+        for (int i = 0; i <= nums.length; i++) {
+            bucketSort.add(new ArrayList<>());
+        }
 
-            bucket[value].add(key);
+        counterByNum.forEach((key, value) -> {
+            bucketSort.get(value).add(key);
         });
 
-        int index = 0;
-        for (int j = bucket.length - 1; j >= 0 && index < k; j--) {
-            if (bucket[j] != null) {
-                for (int num : bucket[j]) {
-                    result[index++] = num;
-                    if (index == k) break; // đủ k phần tử
-                }
+        int temp = 0;
+        for (int i = bucketSort.size() - 1; i > 0 && temp < k; i--) {
+            List<Integer> list = bucketSort.get(i);
+            for (Integer item : list) {
+                if (temp == k) break; // Mảng result có kích thước k, nên chỉ được phép gán result[0] đến result[k-1]
+
+                result[temp] = item;
+                temp++;
+            }
+
+        }
+
+        return result;
+    }
+
+    public int[] topKFrequentPriorityQueueTest(int[] nums, int k) {
+        int[] result = new int[k];
+        Map<Integer, Integer> counterByNum = new HashMap<>();
+        for (int num : nums) {
+            counterByNum.compute(num, (key, value) -> value == null ? 1 : value + 1);
+        }
+
+        PriorityQueue<Integer> heap = new PriorityQueue<>((n, m) -> counterByNum.get(n) - counterByNum.get(m));
+
+        for (Integer num : counterByNum.keySet()) {
+            heap.add(num); // add trước để có đủ các phần tử sắp xếp trong heap
+            if (heap.size() > k) { // sau đó nếu thừa thì remove bớt ra
+                heap.poll();
+            }
+        }
+
+        for (int i = k - 1; i >= 0 ; i--) {
+            if (!heap.isEmpty()) {
+                result[i] = heap.poll();
             }
         }
 
         return result;
-
     }
 
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(new Ex347TopKFrequentElements().topKFrequent(new int[]{1, 2,2,4,3,3}, 2)));
+        System.out.println(Arrays.toString(new Ex347TopKFrequentElements().topKFrequent(new int[]{1, 2, 2, 4, 3, 3}, 2)));
     }
 }
