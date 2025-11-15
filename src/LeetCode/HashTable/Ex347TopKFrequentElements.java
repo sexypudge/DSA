@@ -21,6 +21,9 @@ public class Ex347TopKFrequentElements {
             heap.add(num);
             if (heap.size() > k) heap.poll();
         }
+//         If using max-Heap
+//        Queue<Integer> heap = new PriorityQueue<>((n1, n2) -> map.get(n2) - map.get(n1));
+//        heap.addAll(map.keySet());
 
         for (int i = 0; i < k - 1; i++) {
             if (!heap.isEmpty()) {
@@ -28,8 +31,60 @@ public class Ex347TopKFrequentElements {
             }
         }
 
+//        List<Integer>[] arrLs = new List[nums.length + 1];
+//        for (Integer num : map.keySet()) {
+//            int freq = map.get(num);
+//            if (arrLs[freq] == null) {
+//                arrLs[freq] = new ArrayList<>();
+//            }
+//            arrLs[freq].add(num);
+//        }
+//
+//        int count = 0;
+//        for (int i = arrLs.length - 1; i  > 0 && count < k ; i--) {
+//            if (arrLs[i] != null) {
+//                for (int num : arrLs[i]) {
+//                    result[count] = num;
+//                    count++;
+//                    if (count == k) break; // đủ k phần tử thì thoát
+//                }
+//            }
+//        }
+
+
         return result;
     }
+
+    public int[] topKFrequentBucketSort1(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1); // đếm frequency
+        }
+
+        // bucket sort
+        List<Integer>[] arrLs = new List[nums.length + 1];
+        for (int i = 0; i < arrLs.length; i++) { // khoi tao bucketsort list truoc de tranh nullpointer
+            arrLs[i] = new ArrayList<>();
+        }
+
+        for (Integer num : map.keySet()) {
+            int freq = map.get(num);
+            arrLs[freq].add(num); // xu ly voi moi list của freq tìm đc
+        }
+
+        int[] result = new int[k];
+        int count = 0;
+
+        for (int i = arrLs.length - 1; i > 0 && count < k; i--) { // Result với kích thước k chỉ có index từ i = 0 đến k -1, nếu count = k → ArrayIndexOutOfBoundsException
+            for (int num : arrLs[i]) {
+                result[count] = num;
+                count++;
+            }
+        }
+
+        return result;
+    }
+
 
     public int[] topKFrequentBucketSort(int[] nums, int k) {
         if (k == nums.length) {
@@ -41,7 +96,7 @@ public class Ex347TopKFrequentElements {
             freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
         }
 
-        List[] bucket = new List[nums.length + 1];
+        List<Integer>[] bucket = new List[nums.length + 1];
         for (int key : freqMap.keySet()) {
             int freq = freqMap.get(key);
             if (bucket[freq] == null) {
@@ -70,7 +125,7 @@ public class Ex347TopKFrequentElements {
             counterByNum.compute(num, (key, value) -> value == null ? 1 : value + 1);
         }
 
-        List<List<Integer>> bucketSort = new ArrayList<>(counterByNum.size() + 1); // cover index 0
+        List<List<Integer>> bucketSort = new ArrayList<>(counterByNum.size() + 1); // + 1 to cover index 0
 
         for (int i = 0; i <= nums.length; i++) {
             bucketSort.add(new ArrayList<>());
@@ -95,32 +150,7 @@ public class Ex347TopKFrequentElements {
         return result;
     }
 
-    public int[] topKFrequentPriorityQueueTest(int[] nums, int k) {
-        int[] result = new int[k];
-        Map<Integer, Integer> counterByNum = new HashMap<>();
-        for (int num : nums) {
-            counterByNum.compute(num, (key, value) -> value == null ? 1 : value + 1);
-        }
-
-        PriorityQueue<Integer> heap = new PriorityQueue<>((n, m) -> counterByNum.get(n) - counterByNum.get(m));
-
-        for (Integer num : counterByNum.keySet()) {
-            heap.add(num); // add trước để có đủ các phần tử sắp xếp trong heap
-            if (heap.size() > k) { // sau đó nếu thừa thì remove bớt ra
-                heap.poll();
-            }
-        }
-
-        for (int i = k - 1; i >= 0 ; i--) {
-            if (!heap.isEmpty()) {
-                result[i] = heap.poll();
-            }
-        }
-
-        return result;
-    }
-
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(new Ex347TopKFrequentElements().topKFrequent(new int[]{1, 2, 2, 4, 3, 3}, 2)));
+        System.out.println(Arrays.toString(new Ex347TopKFrequentElements().topKFrequentBucketSort1(new int[]{1, 2, 2, 4, 3, 3}, 2)));
     }
 }

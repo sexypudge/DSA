@@ -67,4 +67,65 @@ public class Ex19 {
         runner2.next = nextTarget;
         return head;
     }
+
+    public ListNode removeNthFromEndMySolution2(ListNode head, int n) {
+        if (head == null) {
+            return head;
+        }
+
+        // Bước 1: Đếm số node
+        int count = 0;
+        ListNode temp = head;
+        while (temp != null) {
+            count++;
+            temp = temp.next;
+        }
+
+        if (count < n) {
+            return null;
+        }
+
+        // Nếu cần xóa node đầu
+        int nodeToSkipIdx = count - n;
+        if (nodeToSkipIdx == 0) {
+            return head.next;
+        }
+
+        // Bước 2: Duyệt đến node trước node cần xóa
+        int idx = 0;
+        ListNode curr = head;
+        while (idx < nodeToSkipIdx - 1) {
+            curr = curr.next;
+            idx++;
+        }
+
+        // Bước 3: Xóa node tại vị trí nodeToSkipIdx
+        if (curr.next != null) {
+            curr.next = curr.next.next;
+        }
+
+        return head;
+    }
+
+
+    public ListNode removeNthFromEnd2(ListNode head, int n) {
+
+        ListNode dummy = new ListNode(-1);
+
+        ListNode fast = dummy;
+        ListNode slow = dummy;
+
+        for (int i = 0; i < n; i++) {
+            fast = fast.next;
+        }
+
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        slow.next = slow.next.next;
+
+        return dummy.next;
+    }
 }

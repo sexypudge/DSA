@@ -86,6 +86,24 @@ public class Ex143ReorderList {
     }
 
 
+    private static void mergeTest(ListNode list1, ListNode list2) {
+        ListNode first = list1;
+        ListNode second = list2;
+
+        while (first != null && second != null) {
+            ListNode temp1 = first.next;
+            ListNode temp2 = second.next;
+
+            first.next = second;
+            if (temp1 == null) break;
+            second.next = temp1;
+
+            first = temp1;
+            second = temp2;
+
+        }
+    }
+
     private static void mergeByMe(ListNode list1, ListNode list2) {
         ListNode headDummy1 = list1;
         boolean isList1Turn = true;

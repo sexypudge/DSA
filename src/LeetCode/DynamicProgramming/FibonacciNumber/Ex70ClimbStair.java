@@ -11,6 +11,10 @@ public class Ex70ClimbStair {
             return n;
         }
 
+//        if (n == 0 || n == 1) { // tức là có 1 cách để đứng ở bậc 0 và 1 cách để đứng bậc 1
+//            return 1;
+//        }
+
         return climb(n - 1) + climb(n - 2);
     }
 
@@ -22,7 +26,7 @@ public class Ex70ClimbStair {
         int[] waysList = new int[n + 1];
 
         // we start from step 0
-        waysList[0] = waysList[1] = 1;
+        waysList[0] = waysList[1] = 1; // tức là có 1 cách để đứng ở bậc 0 và 1 cách để đứng bậc 1
 
         for (int i = 2; i <= n; i++) {
             waysList[i] = waysList[i - 1] + waysList[i - 2];

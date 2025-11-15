@@ -80,7 +80,6 @@ public class Ex746MinCostClimbingStairs {
         return Math.min(first, second);
     }
 
-
     public static void main(String[] args) {
         int[] arr = new int[]{10, 15, 20};
         int[] arr1 = new int[]{1, 100, 1, 1, 1};
@@ -91,4 +90,32 @@ public class Ex746MinCostClimbingStairs {
         System.out.println(minCostClimbingStairsBottomUpMemo(arr2));
         System.out.println(minCostClimbingStairsBottomUpFineTuning(arr1));
     }
+
+    public int minCostClimbingStairs1(int[] cost) {
+        // Bắt đầu từ bậc 0 hoặc bậc 1
+        return Math.min(minCostRecursive(cost, 0), minCostRecursive(cost, 1));
+    }
+
+    private static int minCostRecursive(int[] cost, int idx) {
+        if (idx >= cost.length) {
+            return 0; // Đã lên top
+        }
+        int oneStep = minCostRecursive(cost, idx + 1);
+        int twoStep = minCostRecursive(cost, idx + 2);
+        return cost[idx] + Math.min(oneStep, twoStep);
+    }
+
+    public int minCostClimbingStairsBottomUp(int[] cost) {
+        int n = cost.length;
+        int[] dp = new int[n+1];
+
+        dp[n] = 0; // top
+        dp[n-1] = cost[n-1];
+
+        for (int i = n-2; i >= 0; i--) {
+            dp[i] = cost[i] + Math.min(dp[i+1], dp[i+2]);
+        }
+        return Math.min(dp[0], dp[1]);
+    }
+
 }

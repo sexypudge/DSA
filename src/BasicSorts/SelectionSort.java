@@ -19,7 +19,9 @@ public class SelectionSort {
                 }
             }
 
-            Helper.swap(array, i, minIndex);
+            if (minIndex != i) {
+                Helper.swap(array, i, minIndex);
+            }
         }
     }
 

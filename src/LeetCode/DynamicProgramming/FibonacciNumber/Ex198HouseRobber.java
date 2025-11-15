@@ -18,7 +18,21 @@ public class Ex198HouseRobber {
         return Math.max(robList[nums.length - 1], robList[nums.length - 2]);
     }
 
-    public int robLeetCode(int[] nums) {
+    public static int robSliding(int[] nums) {
+        int prev = 0;
+        int cur = 0;
+
+        for (int num : nums) {
+            int temp = cur;
+            cur = Math.max(cur, prev + num);
+            prev = temp;
+        }
+
+        return cur;
+    }
+
+
+    public static int robLeetCode(int[] nums) {
         int n = nums.length;
 
         if (n == 1) {
@@ -40,30 +54,18 @@ public class Ex198HouseRobber {
     static Integer[] memo;
 
     public static int robRecursive(int[] nums) {
-        if (nums.length == 2) {
-            return Math.max(nums[0], nums[1]);
-        }
-
         memo = new Integer[nums.length];
-        return robRec(nums, nums.length - 1);
+        return rob(nums, nums.length - 1);
     }
 
-    private static int robRec(int[] nums, int houseIndex) {
-        if (houseIndex < 0) {
-            return 0;
-        }
+    private static int rob(int[] nums, int idx) {
+        if (idx < 0) return 0;
 
-        if (memo[houseIndex] != null) {
-            return memo[houseIndex];
-        }
+        if (memo[idx] != null) return memo[idx];
 
-        if (houseIndex == 1 || houseIndex == 0) {
-            return nums[houseIndex];
-        }
+        memo[idx] = Math.max(rob(nums, idx - 2) + nums[idx], rob(nums, idx - 1));
 
-        memo[houseIndex] = Math.max(nums[houseIndex] + Math.max(robRec(nums, houseIndex - 2), robRec(nums, houseIndex - 3)),
-                nums[houseIndex - 1] + Math.max(robRec(nums, houseIndex - 3), robRec(nums, houseIndex - 4)));
-        return memo[houseIndex];
+        return memo[idx];
     }
 
     /**
@@ -93,7 +95,30 @@ public class Ex198HouseRobber {
 
     public static void main(String[] args) {
 //        System.out.println(robRecursive(new int[]{114, 117, 207, 117, 235, 82, 90, 67, 143, 146, 53, 108, 200, 91, 80, 223, 58, 170, 110, 236, 81, 90, 222, 160, 165, 195, 187, 199, 114, 235, 197, 187, 69, 129, 64, 214, 228, 78, 188, 67, 205, 94, 205, 169, 241, 202, 144, 240}));
-        System.out.println(cal(new int[]{3,2,1,3}));
+        System.out.println(robSliding(new int[]{3, 2, 1, 3}));
+        System.out.println(robSliding(new int[]{2, 1, 1, 2}));
+        System.out.println(robLeetCode(new int[]{2, 1, 1, 2}));
 //        System.out.println(cal(new int[]{1,2,3,1}));
+    }
+
+
+    public int robDP(int[] nums) {
+        if (nums.length == 1) {
+            return nums[0];
+        }
+
+        if (nums.length == 2) {
+            return Math.max(nums[0], nums[1]);
+        }
+
+        int[] dp = new int[nums.length];
+        dp[0] = nums[0];
+        dp[1] = nums[1];
+
+        for (int i = 2; i < nums.length; i++) {
+            dp[i] = Math.max(dp[i-2] + nums[i], dp[i-1]);
+        }
+
+        return dp[nums.length - 1];
     }
 }

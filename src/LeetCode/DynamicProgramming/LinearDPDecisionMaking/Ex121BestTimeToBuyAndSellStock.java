@@ -1,32 +1,65 @@
 package LeetCode.DynamicProgramming.LinearDPDecisionMaking;
 
+import java.util.Arrays;
+
 public class Ex121BestTimeToBuyAndSellStock {
 
-    public static int maxProfit(int[] prices) {
-		int maxProfit = 0;
+    public static int maxProfitSlidingWindow(int[] prices) {
+        int maxProfit = 0;
         int dayMin = 0;
 
         for (int i = 1; i < prices.length; i++) {
-            if (prices[i] - prices[dayMin] > maxProfit ) {
-                maxProfit = prices[i] - prices[dayMin];
-            }
-
-            if (prices[i] - prices[dayMin] < 0) {
+            if (prices[dayMin] > prices[i]) {
                 dayMin = i;
+            } else {
+                maxProfit = Math.max(maxProfit, prices[i] - prices[dayMin]);
             }
         }
 
         return maxProfit;
     }
 
-    public static int maxProfitSolution(int[] prices) {
+    public static int maxProfitForLoop(int[] prices) {
+        int maxProfit = 0;
+
+        for (int i = 0; i < prices.length; i++) {
+            for (int j = i + 1; j < prices.length; j++) {
+                if (prices[j] > prices[i]) {
+                    maxProfit = Math.max(maxProfit, prices[j] - prices[i]);
+                }
+            }
+        }
+
+        return maxProfit;
+    }
+
+    public static int maxProfitRecursive(int[] prices) {
+        return profitRecur(prices, 0);
+    }
+
+    private static int profitRecur(int[] prices, int index) {
+
+        if (index >= prices.length) return 0;
+        int maxProfit = 0;
+
+        for (int i = index + 1; i < prices.length; i++) {
+            if (prices[i] > prices[index]) {
+                maxProfit = Math.max(maxProfit, prices[i] - prices[index]);
+            }
+        }
+
+        int futureProfit = profitRecur(prices, index + 1);
+
+        return Math.max(maxProfit, futureProfit);
+    }
+
+    public static int maxProfit(int[] prices) {
         int minPrice = Integer.MAX_VALUE;
         int maxProfit = 0;
 
         for (int price : prices) {
             minPrice = Math.min(minPrice, price);
-            int profit = price - minPrice;
-            maxProfit = Math.max(maxProfit, profit);
+            maxProfit = Math.max(maxProfit, price - minPrice);
         }
 
         return maxProfit;

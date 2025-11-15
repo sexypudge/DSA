@@ -27,35 +27,6 @@ public class Ex125ValidPalindrome {
         return true;
     }
 
-    public boolean isValidPalindrome2(String str) {
-        int leftIndex = 0;
-        int rightIndex = str.length() - 1;
-
-        while (leftIndex < rightIndex) {
-            char left = str.charAt(leftIndex);
-            char right = str.charAt(rightIndex);
-
-            if (!Character.isLetterOrDigit(left)) {
-                leftIndex++;
-                continue;
-            }
-
-            if (!Character.isLetterOrDigit(right)) {
-                rightIndex--;
-                continue;
-            }
-
-            if (left != right) {
-                return false;
-            }
-
-            leftIndex++;
-            rightIndex--;
-        }
-
-        return true;
-    }
-
     public boolean isValidPalindromeTest(String str) {
         int left = 0;
         int right = str.length() - 1;

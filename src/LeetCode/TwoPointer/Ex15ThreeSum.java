@@ -29,7 +29,7 @@ public class Ex15ThreeSum {
                     System.out.println("✅ Found triplet: " + Arrays.asList(nums[i], nums[left], nums[right]));
 
                     left++;
-                    right--;
+                    right--; // bỏ qua ở đây trước nên nums[right + 1] ko bị out of range
 
                     // Bỏ qua trùng ở left
                     while (left < right
@@ -62,7 +62,8 @@ public class Ex15ThreeSum {
         Arrays.sort(nums); // Giúp xử lý duplicate dễ hơn
 
         System.out.println("Sorted input: " + Arrays.toString(nums));
-
+        // i chạy đến num.len - 3 vì chỉ xét bắt đầu bằng i và những số j chạy qua chứ ko xét về trc i
+        // chúng ta cần đủ 3 phần tử để tạo thaành set
         for (int i = 0; i < nums.length - 2; i++) {
             if (i > 0 && nums[i] == nums[i - 1]) {
                 System.out.println("Skipping duplicate i at index " + i + " with value " + nums[i]);
@@ -74,7 +75,7 @@ public class Ex15ThreeSum {
             System.out.println("\nFixing i = " + i + ", value = " + fixed);
 
             for (int j = i + 1; j < nums.length; j++) {
-                int complement = -fixed - nums[j];
+                int complement =  -fixed - nums[j];
                 System.out.println("  Checking j = " + j + ", value = " + nums[j] +
                         " → Need complement = " + complement);
 
@@ -155,12 +156,12 @@ public class Ex15ThreeSum {
     }
 
     public static void main(String[] args) {
-//        System.out.println("Final Result: " + threeSum2(new int[]{-1, -1, 0, 1, 2}));
+        System.out.println("Final Result: " + threeSum2(new int[]{-2, -1, 0, 1, 2}));
 //        System.out.println("Final Result: " + tripple(new int[]{-1, 0, 1, 2}));
 //        System.out.println("Final Result: " + threeSum2(new int[]{-1, 0, 1, 2, -4}));
 //        System.out.println("Final Result: " + threeSum2(new int[]{-1, -1, 2}));
 //        System.out.println(threeSum(new int[]{-1, 2, -1, -1, 2}));
-        System.out.println(threeSum(new int[]{-1, 0, 1, 2, -4}));
+//        System.out.println(threeSum(new int[]{-1, 0, 1, 2, -4}));
     }
 
 }
